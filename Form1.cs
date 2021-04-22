@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 using System.Net;
+using System.IO;
 
 namespace havadurumu_ia
 {
@@ -27,7 +28,7 @@ namespace havadurumu_ia
 
         private void bYaz_Click(object sender, EventArgs e)
         {
-            string xmlDosya = "sonSOA.xml";
+            string xmlDosya = "GuncelHavaDurumu.xml";
             XmlTextReader veri = new XmlTextReader(xmlDosya);
 
             while (veri.Read())
@@ -39,8 +40,8 @@ namespace havadurumu_ia
         private void bDownload_Click(object sender, EventArgs e)
         {
             indir();
-        }
-
+            yenile();
+        }    
         private void indir()
         {
             string uzakBaglanti = "https://www.mgm.gov.tr/FTPDATA/analiz/";
@@ -51,6 +52,28 @@ namespace havadurumu_ia
             xmlVeri = uzakBaglanti + dosyaAdi;
 
             Site.DownloadFile(xmlVeri, dosyaAdi);
+        }
+        private void yenile()
+        {
+            string eskiDosya = @"sonSOA.xml";
+            string yeniDosya = @"GuncelHavaDurumu.xml";
+
+            xmlKopyalama(eskiDosya, yeniDosya);
+
+        }
+
+        private void xmlKopyalama(string eskiDosya, string yeniDosya)
+        {
+            XmlDocument dosya = new XmlDocument();
+            dosya.Load(eskiDosya);
+
+            if (File.Exists(eskiDosya))
+            {
+                File.Delete(eskiDosya);
+            }
+
+            dosya.Save(eskiDosya);
+
         }
     }
 }
