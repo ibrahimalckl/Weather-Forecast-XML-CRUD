@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace havadurumu_ia
 {
@@ -21,5 +23,17 @@ namespace havadurumu_ia
         {
 
         }
+
+        private void bYaz_Click(object sender, EventArgs e)
+        {
+            string xmlDosya = "https://www.mgm.gov.tr/FTPDATA/analiz/sonSOA.xml";
+            XmlTextReader veri = new XmlTextReader(xmlDosya);
+
+            while (veri.Read())
+            {
+                lVeri.Items.Add(veri.Name);
+            }
+        }
+
     }
 }
