@@ -26,21 +26,17 @@ namespace havadurumu_ia
 
         }
 
+        public string eskiDosya = @"sonSOA.xml";
+        public string yeniDosya = @"GuncelHavaDurumu.xml";
+        public string karsilastirmaDosyasi = @"karsilastirma.xml";
         private void bYaz_Click(object sender, EventArgs e)
         {
-            string xmlDosya = "GuncelHavaDurumu.xml";
-            XmlTextReader veri = new XmlTextReader(xmlDosya);
-
-            while (veri.Read())
-            {
-                lVeri.Items.Add(veri.Name);
-            }
-        }
-
+            karsilastirma();
+        }      
         private void bDownload_Click(object sender, EventArgs e)
         {
             indir();
-            yenile();
+            xmlKopyalama();
         }    
         private void indir()
         {
@@ -53,27 +49,53 @@ namespace havadurumu_ia
 
             Site.DownloadFile(xmlVeri, dosyaAdi);
         }
-        private void yenile()
-        {
-            string eskiDosya = @"sonSOA.xml";
-            string yeniDosya = @"GuncelHavaDurumu.xml";
-
-            xmlKopyalama(eskiDosya, yeniDosya);
-
-        }
-
-        private void xmlKopyalama(string eskiDosya, string yeniDosya)
+        private void xmlKopyalama()
         {
             XmlDocument dosya = new XmlDocument();
             dosya.Load(eskiDosya);
 
-            if (File.Exists(eskiDosya))
+            if (File.Exists(yeniDosya))
             {
-                File.Delete(eskiDosya);
+                File.Delete(yeniDosya);        
             }
-
-            dosya.Save(eskiDosya);
+            dosya.Save(yeniDosya);
+            dosya.Save(karsilastirmaDosyasi);
 
         }
+        private void karsilastirma()
+        {
+            FileStream ksAc = new FileStream(karsilastirmaDosyasi, FileMode.Open, FileAccess.Read);
+            StreamReader Oku = new StreamReader(ksAc, Encoding.Default);
+            string Okunan = "";
+
+            FileStream ydAc = new FileStream(yeniDosya, FileMode.Open, FileAccess.Read);
+            StreamReader Oku2 = new StreamReader(ydAc, Encoding.Default);
+            string Okunan2 = "";
+
+            while (!Oku.EndOfStream)
+            {            
+                Okunan += Oku.ReadLine() + "";                          
+            }
+
+            while (!Oku2.EndOfStream)
+            {               
+                Okunan2 += Oku2.ReadLine() + "";
+            }
+
+            if (Okunan == Okunan2)
+            {
+                MessageBox.Show("esit");
+            }
+            else
+            {
+                MessageBox.Show("degil");
+            }
+
+            Oku.Close();
+            Oku2.Close();
+
+        }
+
+
     }
 }
