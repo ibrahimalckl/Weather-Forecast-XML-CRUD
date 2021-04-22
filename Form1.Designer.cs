@@ -1,7 +1,7 @@
 ﻿
 namespace havadurumu_ia
 {
-    partial class Form1
+    partial class fHavaDurumu
     {
         /// <summary>
         ///Gerekli tasarımcı değişkeni.
@@ -63,9 +63,9 @@ namespace havadurumu_ia
             this.bDownload.TabIndex = 2;
             this.bDownload.Text = "Veri İndir";
             this.bDownload.UseVisualStyleBackColor = true;
-           
+            this.bDownload.Click += new System.EventHandler(this.bDownload_Click);
             // 
-            // Form1
+            // fHavaDurumu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -73,9 +73,9 @@ namespace havadurumu_ia
             this.Controls.Add(this.bDownload);
             this.Controls.Add(this.lVeri);
             this.Controls.Add(this.bYaz);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "fHavaDurumu";
+            this.Text = "Hava Durumu";
+            this.Load += new System.EventHandler(this.fHavaDurumu_Load);
             this.ResumeLayout(false);
 
         }
