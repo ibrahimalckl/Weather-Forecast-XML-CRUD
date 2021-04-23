@@ -109,20 +109,50 @@ namespace havadurumu_ia
                 MessageBox.Show("Verileriniz güncel.", "Bilgilendirme", MessageBoxButtons.OK ,MessageBoxIcon.Information);
             }
             else if(MessageBox.Show("Verileriniz güncel değil. Güncellemek ister misiniz?", "Bilgilendirme", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-            {     
+            {
+                indir();
+                xmlKopyalama();
                 dosya.Load(karsilastirmaDosyasi);
                 dosya.Save(eskiDosya);
             }
                 
         }
-        private void otomatikGuncelleme()
+        private void karsilastirma2()
         {
-            indir();
-            xmlKopyalama();
-
             XmlDocument dosya = new XmlDocument();
-            dosya.Load(karsilastirmaDosyasi);
-            dosya.Save(eskiDosya);
+
+            FileStream ksAc = new FileStream(karsilastirmaDosyasi, FileMode.Open, FileAccess.Read);
+            StreamReader Oku = new StreamReader(ksAc, Encoding.Default);
+            string Okunan = "";
+
+            FileStream edAc = new FileStream(eskiDosya, FileMode.Open, FileAccess.Read);
+            StreamReader Oku2 = new StreamReader(edAc, Encoding.Default);
+            string Okunan2 = "";
+
+            while (!Oku.EndOfStream)
+            {
+                Okunan += Oku.ReadLine() + "";
+            }
+
+            while (!Oku2.EndOfStream)
+            {
+                Okunan2 += Oku2.ReadLine() + "";
+            }
+
+            Oku.Close();
+            Oku2.Close();
+
+            if (Okunan != Okunan2)
+            {
+                if (MessageBox.Show("Verileriniz güncel değil. Güncellemek ister misiniz?", "Bilgilendirme", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                indir();
+                xmlKopyalama();
+                dosya.Load(karsilastirmaDosyasi);
+                dosya.Save(eskiDosya);
+                }
+            }
+            
         }
         private void lTarih_Click(object sender, EventArgs e)
         {
@@ -146,10 +176,9 @@ namespace havadurumu_ia
             {                
                 sayac++;
                 
-                if (sayac == 5)
+                if (sayac == 1)
                 {
-                    otomatikGuncelleme();
-                    MessageBox.Show("Veriler Otomatik Güncellendi.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);                  
+                    karsilastirma2();
                     sayac = 0;
                 }
             }

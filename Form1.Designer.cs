@@ -55,7 +55,7 @@ namespace havadurumu_ia
             // bDownload
             // 
             this.bDownload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.bDownload.Location = new System.Drawing.Point(25, 196);
+            this.bDownload.Location = new System.Drawing.Point(25, 200);
             this.bDownload.Name = "bDownload";
             this.bDownload.Size = new System.Drawing.Size(154, 51);
             this.bDownload.TabIndex = 2;
@@ -74,9 +74,8 @@ namespace havadurumu_ia
             this.lTarih.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lTarih.Location = new System.Drawing.Point(21, 9);
             this.lTarih.Name = "lTarih";
-            this.lTarih.Size = new System.Drawing.Size(45, 24);
+            this.lTarih.Size = new System.Drawing.Size(0, 24);
             this.lTarih.TabIndex = 3;
-            this.lTarih.Text = "tarih";
             this.lTarih.Click += new System.EventHandler(this.lTarih_Click);
             // 
             // lSaat
@@ -85,9 +84,8 @@ namespace havadurumu_ia
             this.lSaat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lSaat.Location = new System.Drawing.Point(20, 44);
             this.lSaat.Name = "lSaat";
-            this.lSaat.Size = new System.Drawing.Size(49, 25);
+            this.lSaat.Size = new System.Drawing.Size(0, 25);
             this.lSaat.TabIndex = 4;
-            this.lSaat.Text = "saat";
             this.lSaat.Click += new System.EventHandler(this.lSaat_Click);
             // 
             // lSayac
@@ -103,11 +101,16 @@ namespace havadurumu_ia
             // 
             // dVeri
             // 
+            this.dVeri.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dVeri.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.dVeri.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dVeri.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dVeri.Location = new System.Drawing.Point(219, 9);
             this.dVeri.Name = "dVeri";
+            this.dVeri.RowHeadersVisible = false;
             this.dVeri.RowHeadersWidth = 51;
             this.dVeri.RowTemplate.Height = 24;
+            this.dVeri.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dVeri.Size = new System.Drawing.Size(882, 529);
             this.dVeri.TabIndex = 7;
             // 
