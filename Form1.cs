@@ -25,17 +25,18 @@ namespace havadurumu_ia
         public string yeniDosya = @"sonSOA.xml";
         public string eskiDosya = @"GuncelHavaDurumu.xml";
         public string karsilastirmaDosyasi = @"karsilastirma.xml";
+        public int sayac;
         private void fHavaDurumu_Load(object sender, EventArgs e)
         {
             timer1.Start();
-
-            
-            if (File.Exists(yeniDosya) == false)
+                     
+            indir();
+                          
+            if (File.Exists(yeniDosya))
             {
-               indir();
                xmlKopyalama();
             }
-        }      
+        }
         private void bYaz_Click(object sender, EventArgs e)
         {
             if (File.Exists(eskiDosya) && File.Exists(karsilastirmaDosyasi))
@@ -70,12 +71,7 @@ namespace havadurumu_ia
             if (File.Exists(eskiDosya) == false)
             {
                dosya.Save(eskiDosya);
-            }                            
-            //else if (File.Exists(eskiDosya))
-            //{
-            //    karsilastirma();
-            //}
-                      
+            }                                              
         }
         private void karsilastirma()
         {
@@ -115,18 +111,44 @@ namespace havadurumu_ia
             }
                 
         }
+        private void otomatikGuncelleme()
+        {
+            XmlDocument dosya = new XmlDocument();
+            dosya.Load(karsilastirmaDosyasi);
+            dosya.Save(eskiDosya);
+        }
         private void lTarih_Click(object sender, EventArgs e)
         {
             lTarih.Text = DateTime.Now.ToLongDateString();
         }
         private void lSaat_Click(object sender, EventArgs e)
         {
-            lSaat.Text = DateTime.Now.ToLongTimeString();
+            lSaat.Text = DateTime.Now.ToLongTimeString();     
+        }
+        private void lSayac_Click(object sender, EventArgs e)
+        {        
+            lSayac.Text = DateTime.Now.Second.ToString("");
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             lTarih.Text = DateTime.Now.ToLongDateString();
             lSaat.Text = DateTime.Now.ToLongTimeString();
+            lSayac.Text = DateTime.Now.Second.ToString("");         
+                        
+            if (lSayac.Text == "10" || lSayac.Text == "20" || lSayac.Text == "30" || lSayac.Text == "40" || lSayac.Text == "50" || lSayac.Text == "59")
+            {                
+                sayac++;
+                
+                if (sayac == 2)
+                {
+                    otomatikGuncelleme();
+                    MessageBox.Show("Veriler Otomatik Güncellendi.");
+                    sayac = 0;
+                }
+            }
+            
         }
+
+        
     }
 }

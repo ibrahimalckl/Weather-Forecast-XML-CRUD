@@ -36,6 +36,7 @@ namespace havadurumu_ia
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lTarih = new System.Windows.Forms.Label();
             this.lSaat = new System.Windows.Forms.Label();
+            this.lSayac = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bYaz
@@ -71,6 +72,7 @@ namespace havadurumu_ia
             // 
             // timer1
             // 
+            this.timer1.Interval = 900;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // lTarih
@@ -78,9 +80,8 @@ namespace havadurumu_ia
             this.lTarih.AutoSize = true;
             this.lTarih.Location = new System.Drawing.Point(633, 9);
             this.lTarih.Name = "lTarih";
-            this.lTarih.Size = new System.Drawing.Size(46, 17);
+            this.lTarih.Size = new System.Drawing.Size(0, 17);
             this.lTarih.TabIndex = 3;
-            this.lTarih.Text = "label1";
             this.lTarih.Click += new System.EventHandler(this.lTarih_Click);
             // 
             // lSaat
@@ -88,16 +89,26 @@ namespace havadurumu_ia
             this.lSaat.AutoSize = true;
             this.lSaat.Location = new System.Drawing.Point(633, 41);
             this.lSaat.Name = "lSaat";
-            this.lSaat.Size = new System.Drawing.Size(46, 17);
+            this.lSaat.Size = new System.Drawing.Size(0, 17);
             this.lSaat.TabIndex = 4;
-            this.lSaat.Text = "label2";
             this.lSaat.Click += new System.EventHandler(this.lSaat_Click);
+            // 
+            // lSayac
+            // 
+            this.lSayac.AutoSize = true;
+            this.lSayac.Location = new System.Drawing.Point(500, 9);
+            this.lSayac.Name = "lSayac";
+            this.lSayac.Size = new System.Drawing.Size(0, 17);
+            this.lSayac.TabIndex = 6;
+            this.lSayac.Visible = false;
+            this.lSayac.Click += new System.EventHandler(this.lSayac_Click);
             // 
             // fHavaDurumu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lSayac);
             this.Controls.Add(this.lSaat);
             this.Controls.Add(this.lTarih);
             this.Controls.Add(this.bDownload);
@@ -119,6 +130,7 @@ namespace havadurumu_ia
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lTarih;
         private System.Windows.Forms.Label lSaat;
+        private System.Windows.Forms.Label lSayac;
     }
 }
 
