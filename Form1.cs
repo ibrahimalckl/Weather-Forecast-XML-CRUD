@@ -11,6 +11,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Net;
 using System.IO;
+using System.Timers;
 
 namespace havadurumu_ia
 {
@@ -26,9 +27,9 @@ namespace havadurumu_ia
         public string karsilastirmaDosyasi = @"karsilastirma.xml";
         private void fHavaDurumu_Load(object sender, EventArgs e)
         {
+            timer1.Start();
 
-            //MessageBox.Show(File.Exists(eskiDosya).ToString());
-
+            
             if (File.Exists(yeniDosya) == false)
             {
                indir();
@@ -113,9 +114,19 @@ namespace havadurumu_ia
                 dosya.Save(eskiDosya);
             }
                 
-            
-
         }
-
+        private void lTarih_Click(object sender, EventArgs e)
+        {
+            lTarih.Text = DateTime.Now.ToLongDateString();
+        }
+        private void lSaat_Click(object sender, EventArgs e)
+        {
+            lSaat.Text = DateTime.Now.ToLongTimeString();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lTarih.Text = DateTime.Now.ToLongDateString();
+            lSaat.Text = DateTime.Now.ToLongTimeString();
+        }
     }
 }
