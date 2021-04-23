@@ -20,18 +20,29 @@ namespace havadurumu_ia
         {
             InitializeComponent();
         }
-
+        
+        public string yeniDosya = @"sonSOA.xml";
+        public string eskiDosya = @"GuncelHavaDurumu.xml";
+        public string karsilastirmaDosyasi = @"karsilastirma.xml";
         private void fHavaDurumu_Load(object sender, EventArgs e)
         {
 
-        }
+            //MessageBox.Show(File.Exists(eskiDosya).ToString());
 
-        public string eskiDosya = @"sonSOA.xml";
-        public string yeniDosya = @"GuncelHavaDurumu.xml";
-        public string karsilastirmaDosyasi = @"karsilastirma.xml";
+            if (File.Exists(yeniDosya) == false)
+            {
+               indir();
+               xmlKopyalama();
+            }
+        }      
         private void bYaz_Click(object sender, EventArgs e)
         {
-            karsilastirma();
+            if (File.Exists(eskiDosya) && File.Exists(karsilastirmaDosyasi))
+            {
+                xmlKopyalama();
+                karsilastirma();           
+            }
+            
         }      
         private void bDownload_Click(object sender, EventArgs e)
         {
@@ -52,24 +63,29 @@ namespace havadurumu_ia
         private void xmlKopyalama()
         {
             XmlDocument dosya = new XmlDocument();
-            dosya.Load(eskiDosya);
-
-            if (File.Exists(yeniDosya))
-            {
-                File.Delete(yeniDosya);        
-            }
-            dosya.Save(yeniDosya);
+            dosya.Load(yeniDosya);
             dosya.Save(karsilastirmaDosyasi);
 
+            if (File.Exists(eskiDosya) == false)
+            {
+               dosya.Save(eskiDosya);
+            }                            
+            //else if (File.Exists(eskiDosya))
+            //{
+            //    karsilastirma();
+            //}
+                      
         }
         private void karsilastirma()
         {
+            XmlDocument dosya = new XmlDocument();
+
             FileStream ksAc = new FileStream(karsilastirmaDosyasi, FileMode.Open, FileAccess.Read);
             StreamReader Oku = new StreamReader(ksAc, Encoding.Default);
             string Okunan = "";
 
-            FileStream ydAc = new FileStream(yeniDosya, FileMode.Open, FileAccess.Read);
-            StreamReader Oku2 = new StreamReader(ydAc, Encoding.Default);
+            FileStream edAc = new FileStream(eskiDosya, FileMode.Open, FileAccess.Read);
+            StreamReader Oku2 = new StreamReader(edAc, Encoding.Default);
             string Okunan2 = "";
 
             while (!Oku.EndOfStream)
@@ -80,7 +96,10 @@ namespace havadurumu_ia
             while (!Oku2.EndOfStream)
             {               
                 Okunan2 += Oku2.ReadLine() + "";
-            }
+            }          
+            
+            Oku.Close();
+            Oku2.Close();
 
             if (Okunan == Okunan2)
             {
@@ -89,13 +108,14 @@ namespace havadurumu_ia
             else
             {
                 MessageBox.Show("degil");
+                
+                dosya.Load(karsilastirmaDosyasi);
+                dosya.Save(eskiDosya);
             }
-
-            Oku.Close();
-            Oku2.Close();
+                
+            
 
         }
-
 
     }
 }

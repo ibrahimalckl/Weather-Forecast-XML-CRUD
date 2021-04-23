@@ -32,7 +32,6 @@ namespace havadurumu_ia
             this.bYaz = new System.Windows.Forms.Button();
             this.lVeri = new System.Windows.Forms.ListBox();
             this.bDownload = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bYaz
@@ -66,21 +65,11 @@ namespace havadurumu_ia
             this.bDownload.UseVisualStyleBackColor = true;
             this.bDownload.Click += new System.EventHandler(this.bDownload_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(111, 259);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 17);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
-            // 
             // fHavaDurumu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.bDownload);
             this.Controls.Add(this.lVeri);
             this.Controls.Add(this.bYaz);
@@ -88,7 +77,6 @@ namespace havadurumu_ia
             this.Text = "Hava Durumu";
             this.Load += new System.EventHandler(this.fHavaDurumu_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -97,7 +85,6 @@ namespace havadurumu_ia
         private System.Windows.Forms.Button bYaz;
         private System.Windows.Forms.ListBox lVeri;
         private System.Windows.Forms.Button bDownload;
-        private System.Windows.Forms.Label label1;
     }
 }
 
