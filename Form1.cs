@@ -38,11 +38,12 @@ namespace havadurumu_ia
             }
         }
         private void bYaz_Click(object sender, EventArgs e)
-        {
+        {         
             if (File.Exists(eskiDosya) && File.Exists(karsilastirmaDosyasi))
-            {
-                xmlKopyalama();
-                karsilastirma();           
+            {       
+                DataSet veri = new DataSet();
+                veri.ReadXml(@"GuncelHavaDurumu.xml");
+                dVeri.DataSource = veri.Tables[1];
             }
             
         }      
@@ -50,7 +51,12 @@ namespace havadurumu_ia
         {
             indir();
             xmlKopyalama();
-        }    
+            MessageBox.Show("Başarıyla indirildi.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void bGuncelleme_Click(object sender, EventArgs e)
+        {
+            karsilastirma();
+        }
         private void indir()
         {
             string uzakBaglanti = "https://www.mgm.gov.tr/FTPDATA/analiz/";
@@ -100,12 +106,10 @@ namespace havadurumu_ia
 
             if (Okunan == Okunan2)
             {
-                MessageBox.Show("esit");
+                MessageBox.Show("Verileriniz güncel.", "Bilgilendirme", MessageBoxButtons.OK ,MessageBoxIcon.Information);
             }
-            else
-            {
-                MessageBox.Show("degil");
-                
+            else if(MessageBox.Show("Verileriniz güncel değil. Güncellemek ister misiniz?", "Bilgilendirme", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {     
                 dosya.Load(karsilastirmaDosyasi);
                 dosya.Save(eskiDosya);
             }
@@ -113,6 +117,9 @@ namespace havadurumu_ia
         }
         private void otomatikGuncelleme()
         {
+            indir();
+            xmlKopyalama();
+
             XmlDocument dosya = new XmlDocument();
             dosya.Load(karsilastirmaDosyasi);
             dosya.Save(eskiDosya);
@@ -135,14 +142,14 @@ namespace havadurumu_ia
             lSaat.Text = DateTime.Now.ToLongTimeString();
             lSayac.Text = DateTime.Now.Second.ToString("");         
                         
-            if (lSayac.Text == "10" || lSayac.Text == "20" || lSayac.Text == "30" || lSayac.Text == "40" || lSayac.Text == "50" || lSayac.Text == "59")
+            if (lSayac.Text == "10")
             {                
                 sayac++;
                 
-                if (sayac == 2)
+                if (sayac == 5)
                 {
                     otomatikGuncelleme();
-                    MessageBox.Show("Veriler Otomatik Güncellendi.");
+                    MessageBox.Show("Veriler Otomatik Güncellendi.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);                  
                     sayac = 0;
                 }
             }
