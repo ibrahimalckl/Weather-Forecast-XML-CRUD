@@ -32,6 +32,10 @@ namespace havadurumu_ia
             {
                 baslangic();
             }
+            else if (File.Exists(guncelDosya))
+            {
+                otomatikGuncelleme();
+            }          
         }
         private void bYaz_Click(object sender, EventArgs e)
         {       
@@ -42,129 +46,25 @@ namespace havadurumu_ia
 
         }
         private void bDownload_Click(object sender, EventArgs e)
-        {
-            if (File.Exists(guncelDosya) == false)
-            {
-                baslangic();
-                MessageBox.Show("Başarıyla indirildi.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                string url = "https://www.mgm.gov.tr/FTPDATA/analiz/sonSOA.xml";
+        {          
+            string url = "https://www.mgm.gov.tr/FTPDATA/analiz/sonSOA.xml";
 
-                WebRequest istek = HttpWebRequest.Create(url);
-                WebResponse cevap = istek.GetResponse();
-                StreamReader donenBilgiler = new StreamReader(cevap.GetResponseStream());
+            WebRequest istek = HttpWebRequest.Create(url);
+            WebResponse cevap = istek.GetResponse();
+            StreamReader donenBilgiler = new StreamReader(cevap.GetResponseStream());
 
-                List<string> veri = new List<string>();
+            List<string> veri = new List<string>();
 
-                veri.Add(donenBilgiler.ReadToEnd());
-                File.WriteAllLines(@"GuncelHavaDurumu.txt", veri);
+            veri.Add(donenBilgiler.ReadToEnd());
+            File.WriteAllLines(@"GuncelHavaDurumu.txt", veri);
 
-                MessageBox.Show("Başarıyla indirildi.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }          
+            MessageBox.Show("Başarıyla indirildi.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);          
+            sonGuncellenme();
         }
         private void bGuncelleme_Click(object sender, EventArgs e)
         {
             karsilastirma();
         }
-        //private void indir()
-        //{
-        //    string uzakBaglanti = "https://www.mgm.gov.tr/FTPDATA/analiz/";
-        //    string dosyaAdi = "sonSOA.xml", xmlVeri = null;
-
-        //    WebClient Site = new WebClient();
-
-        //    xmlVeri = uzakBaglanti + dosyaAdi;
-
-        //    Site.DownloadFile(xmlVeri, dosyaAdi);
-        //}
-        //private void xmlKopyalama()
-        //{
-        //    XmlDocument dosya = new XmlDocument();
-        //    dosya.Load(yeniDosya);
-        //    dosya.Save(karsilastirmaDosyasi);
-
-        //    if (File.Exists(eskiDosya) == false)
-        //    {
-        //       dosya.Save(eskiDosya);
-        //    }                                              
-        //}
-        //private void karsilastirma()
-        //{
-        //    XmlDocument dosya = new XmlDocument();
-
-        //    FileStream ksAc = new FileStream(karsilastirmaDosyasi, FileMode.Open, FileAccess.Read);
-        //    StreamReader Oku = new StreamReader(ksAc, Encoding.Default);
-        //    string Okunan = "";
-
-        //    FileStream edAc = new FileStream(eskiDosya, FileMode.Open, FileAccess.Read);
-        //    StreamReader Oku2 = new StreamReader(edAc, Encoding.Default);
-        //    string Okunan2 = "";
-
-        //    while (!Oku.EndOfStream)
-        //    {            
-        //        Okunan += Oku.ReadLine() + "";                          
-        //    }
-
-        //    while (!Oku2.EndOfStream)
-        //    {               
-        //        Okunan2 += Oku2.ReadLine() + "";
-        //    }          
-            
-        //    Oku.Close();
-        //    Oku2.Close();
-
-        //    if (Okunan == Okunan2)
-        //    {
-        //        MessageBox.Show("Verileriniz güncel.", "Bilgilendirme", MessageBoxButtons.OK ,MessageBoxIcon.Information);
-        //    }
-        //    else if(MessageBox.Show("Verileriniz güncel değil. Güncellemek ister misiniz?", "Bilgilendirme", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-        //    {
-        //        indir();
-        //        xmlKopyalama();
-        //        dosya.Load(karsilastirmaDosyasi);
-        //        dosya.Save(eskiDosya);
-        //    }
-                
-        //}
-        //private void karsilastirma2()
-        //{
-        //    XmlDocument dosya = new XmlDocument();
-
-        //    FileStream ksAc = new FileStream(karsilastirmaDosyasi, FileMode.Open, FileAccess.Read);
-        //    StreamReader Oku = new StreamReader(ksAc, Encoding.Default);
-        //    string Okunan = "";
-
-        //    FileStream edAc = new FileStream(eskiDosya, FileMode.Open, FileAccess.Read);
-        //    StreamReader Oku2 = new StreamReader(edAc, Encoding.Default);
-        //    string Okunan2 = "";
-
-        //    while (!Oku.EndOfStream)
-        //    {
-        //        Okunan += Oku.ReadLine() + "";
-        //    }
-
-        //    while (!Oku2.EndOfStream)
-        //    {
-        //        Okunan2 += Oku2.ReadLine() + "";
-        //    }
-
-        //    Oku.Close();
-        //    Oku2.Close();
-
-        //    if (Okunan != Okunan2)
-        //    {
-        //        if (MessageBox.Show("Verileriniz güncel değil. Güncellemek ister misiniz?", "Bilgilendirme", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-        //        {
-        //        indir();
-        //        xmlKopyalama();
-        //        dosya.Load(karsilastirmaDosyasi);
-        //        dosya.Save(eskiDosya);
-        //        }
-        //    }
-            
-        //}
         private void lTarih_Click(object sender, EventArgs e)
         {
             lTarih.Text = DateTime.Now.ToLongDateString();
@@ -188,14 +88,37 @@ namespace havadurumu_ia
                 sayac++;
                 
                 if (sayac == 5)
-                {                   
-                    karsilastirma();                    
+                {                           
+                    otomatikGuncelleme();                    
                     sayac = 0;
                 }
             }
             
         }
-        public void baslangic()
+        private void otomatikGuncelleme()
+        {
+            string url = "https://www.mgm.gov.tr/FTPDATA/analiz/sonSOA.xml";
+
+            WebRequest istek = HttpWebRequest.Create(url);
+            WebResponse cevap = istek.GetResponse();
+            StreamReader donenBilgiler = new StreamReader(cevap.GetResponseStream());
+
+            List<string> veri = new List<string>();
+            veri.Add(donenBilgiler.ReadToEnd());
+
+            List<string> gnclDosya = new List<string>();
+            gnclDosya = File.ReadAllLines(guncelDosya).ToList();
+
+            if (gnclDosya[0] != veri[0])
+            {
+                if (MessageBox.Show("Verileriniz güncel değil. Güncellemek ister misiniz?", "Bilgilendirme", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    sonGuncellenme();
+                    File.WriteAllLines(@"GuncelHavaDurumu.txt", veri);
+                }
+            }            
+        }
+        private void baslangic()
         {
             string url = "https://www.mgm.gov.tr/FTPDATA/analiz/sonSOA.xml";
 
@@ -231,8 +154,14 @@ namespace havadurumu_ia
             }
             else if (MessageBox.Show("Verileriniz güncel değil. Güncellemek ister misiniz?", "Bilgilendirme", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
+                sonGuncellenme();
                 File.WriteAllLines(@"GuncelHavaDurumu.txt", veri);
             }
+        }
+        private void sonGuncellenme()
+        {
+            lsonGuncellenmeTarihi.Visible = true;
+            lsonGuncelleme.Text = DateTime.Now.ToLongTimeString();
         }
     }
 }

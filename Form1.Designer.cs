@@ -38,13 +38,15 @@ namespace havadurumu_ia
             this.lSayac = new System.Windows.Forms.Label();
             this.dVeri = new System.Windows.Forms.DataGridView();
             this.bGuncelleme = new System.Windows.Forms.Button();
+            this.lsonGuncelleme = new System.Windows.Forms.Label();
+            this.lsonGuncellenmeTarihi = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dVeri)).BeginInit();
             this.SuspendLayout();
             // 
             // bYaz
             // 
             this.bYaz.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.bYaz.Location = new System.Drawing.Point(25, 116);
+            this.bYaz.Location = new System.Drawing.Point(25, 185);
             this.bYaz.Name = "bYaz";
             this.bYaz.Size = new System.Drawing.Size(154, 50);
             this.bYaz.TabIndex = 0;
@@ -55,7 +57,7 @@ namespace havadurumu_ia
             // bDownload
             // 
             this.bDownload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.bDownload.Location = new System.Drawing.Point(25, 200);
+            this.bDownload.Location = new System.Drawing.Point(25, 273);
             this.bDownload.Name = "bDownload";
             this.bDownload.Size = new System.Drawing.Size(154, 51);
             this.bDownload.TabIndex = 2;
@@ -117,7 +119,7 @@ namespace havadurumu_ia
             // bGuncelleme
             // 
             this.bGuncelleme.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.bGuncelleme.Location = new System.Drawing.Point(25, 283);
+            this.bGuncelleme.Location = new System.Drawing.Point(25, 363);
             this.bGuncelleme.Name = "bGuncelleme";
             this.bGuncelleme.Size = new System.Drawing.Size(154, 51);
             this.bGuncelleme.TabIndex = 8;
@@ -125,11 +127,33 @@ namespace havadurumu_ia
             this.bGuncelleme.UseVisualStyleBackColor = true;
             this.bGuncelleme.Click += new System.EventHandler(this.bGuncelleme_Click);
             // 
+            // lsonGuncelleme
+            // 
+            this.lsonGuncelleme.AutoSize = true;
+            this.lsonGuncelleme.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lsonGuncelleme.Location = new System.Drawing.Point(21, 111);
+            this.lsonGuncelleme.Name = "lsonGuncelleme";
+            this.lsonGuncelleme.Size = new System.Drawing.Size(0, 25);
+            this.lsonGuncelleme.TabIndex = 9;
+            // 
+            // lsonGuncellenmeTarihi
+            // 
+            this.lsonGuncellenmeTarihi.AutoSize = true;
+            this.lsonGuncellenmeTarihi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lsonGuncellenmeTarihi.Location = new System.Drawing.Point(20, 86);
+            this.lsonGuncellenmeTarihi.Name = "lsonGuncellenmeTarihi";
+            this.lsonGuncellenmeTarihi.Size = new System.Drawing.Size(174, 25);
+            this.lsonGuncellenmeTarihi.TabIndex = 10;
+            this.lsonGuncellenmeTarihi.Text = "Son Güncellenme:";
+            this.lsonGuncellenmeTarihi.Visible = false;
+            // 
             // fHavaDurumu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1115, 550);
+            this.Controls.Add(this.lsonGuncellenmeTarihi);
+            this.Controls.Add(this.lsonGuncelleme);
             this.Controls.Add(this.bGuncelleme);
             this.Controls.Add(this.dVeri);
             this.Controls.Add(this.lSayac);
@@ -156,6 +180,8 @@ namespace havadurumu_ia
         private System.Windows.Forms.Label lSayac;
         private System.Windows.Forms.DataGridView dVeri;
         private System.Windows.Forms.Button bGuncelleme;
+        private System.Windows.Forms.Label lsonGuncelleme;
+        private System.Windows.Forms.Label lsonGuncellenmeTarihi;
     }
 }
 
