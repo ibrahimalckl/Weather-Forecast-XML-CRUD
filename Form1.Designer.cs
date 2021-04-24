@@ -105,13 +105,13 @@ namespace havadurumu_ia
             this.dVeri.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.dVeri.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dVeri.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dVeri.Location = new System.Drawing.Point(219, 9);
+            this.dVeri.Location = new System.Drawing.Point(252, 9);
             this.dVeri.Name = "dVeri";
             this.dVeri.RowHeadersVisible = false;
             this.dVeri.RowHeadersWidth = 51;
             this.dVeri.RowTemplate.Height = 24;
             this.dVeri.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dVeri.Size = new System.Drawing.Size(882, 529);
+            this.dVeri.Size = new System.Drawing.Size(849, 529);
             this.dVeri.TabIndex = 7;
             // 
             // bGuncelleme
